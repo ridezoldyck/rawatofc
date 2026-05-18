@@ -28,38 +28,38 @@
 
   /* NAV */
   nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    background: var(--blue);
+  }
+  .nav-inner {
     display: flex; align-items: center; justify-content: space-between;
     padding: 1rem 5%;
-    background: var(--blue);
   }
   .nav-logo {
     display: flex;
     align-items: center;
     gap: .75rem;
     text-decoration: none;
-}
-
-.logo-mark {
+  }
+  .logo-mark {
     width: 50px;
     height: 50px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     overflow: hidden;
     border-radius: 8px;
-}
-
-.logo-mark img {
+  }
+  .logo-mark img {
     width: 100%;
     height: 100%;
     object-fit: contain;
     display: block;
-}
+  }
   .logo-text { font-family: 'Space Mono', monospace; font-size: 1.125rem; font-weight: 700; color: #fff; }
   .logo-text span { color: var(--lime); }
+
+  /* Desktop nav links */
   .nav-links { display: flex; gap: 2rem; list-style: none; }
   .nav-links a { font-size: .8rem; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; color: rgba(255,255,255,.7); text-decoration: none; transition: color .2s; }
   .nav-links a:hover { color: var(--lime); }
@@ -70,6 +70,55 @@
     transition: background .2s, transform .15s;
   }
   .nav-cta:hover { background: #ccff33; transform: scale(1.03); }
+
+  /* Hamburger button */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 6px;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px; height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    transition: transform .3s, opacity .3s;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* Mobile drawer */
+  .mobile-menu {
+    display: none;
+    flex-direction: column;
+    background: var(--blue-dark);
+    padding: 0.5rem 5% 1.5rem;
+    border-top: 1px solid rgba(255,255,255,.1);
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-size: .95rem; font-weight: 600;
+    letter-spacing: .04em; text-transform: uppercase;
+    color: rgba(255,255,255,.85); text-decoration: none;
+    padding: .85rem 0;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    transition: color .2s;
+  }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu a:hover { color: var(--lime); }
+  .mobile-menu .m-cta {
+    background: var(--lime); color: var(--blue);
+    margin-top: 1rem; padding: .8rem 1.5rem;
+    border-radius: 2rem; text-align: center;
+    font-weight: 700; border-bottom: none;
+    display: flex; align-items: center; justify-content: center; gap: .4rem;
+  }
 
   /* HERO */
   .hero {
@@ -129,6 +178,7 @@
     display: flex; gap: 2.5rem; margin-top: 3.5rem;
     padding-top: 2rem; border-top: 1px solid rgba(255,255,255,.12);
     animation: fadeUp .5s .4s ease both;
+    flex-wrap: wrap;
   }
   .stat-num { font-family: 'Space Mono', monospace; font-size: 1.75rem; font-weight: 700; color: var(--lime); }
   .stat-label { font-size: .75rem; color: rgba(255,255,255,.5); margin-top: .25rem; }
@@ -150,11 +200,11 @@
   .info-list li::before { content: ''; display: block; width: 6px; height: 6px; border-radius: 50%; background: var(--lime); flex-shrink: 0; }
   .hours-card {
     background: var(--lime); border-radius: 12px; padding: 1.25rem 1.5rem;
-    display: flex; align-items: center; justify-content: space-between;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
   }
   .hours-label { font-size: .7rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--blue); margin-bottom: .2rem; }
   .hours-time { font-family: 'Space Mono', monospace; font-size: 1.375rem; font-weight: 700; color: var(--blue); }
-  .hours-badge { background: var(--blue); color: var(--lime); padding: .4rem 1rem; border-radius: 2rem; font-size: .7rem; font-weight: 700; letter-spacing: .06em; }
+  .hours-badge { background: var(--blue); color: var(--lime); padding: .4rem 1rem; border-radius: 2rem; font-size: .7rem; font-weight: 700; letter-spacing: .06em; white-space: nowrap; }
 
   @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
   @keyframes fadeIn { from{opacity:0;transform:scale(.97)} to{opacity:1;transform:scale(1)} }
@@ -188,9 +238,7 @@
   .treatment-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
   .treatment-card { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: transform .25s, box-shadow .25s; }
   .treatment-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(20,0,255,.1); }
-  .treatment-hd {
-    background: var(--blue); padding: 1.5rem; position: relative; overflow: hidden;
-  }
+  .treatment-hd { background: var(--blue); padding: 1.5rem; position: relative; overflow: hidden; }
   .treatment-hd::after {
     content: attr(data-n); position: absolute; right: -1rem; top: -1rem;
     font-family: 'Space Mono', monospace; font-size: 4rem; font-weight: 700;
@@ -219,11 +267,12 @@
   .pl-item {
     display: flex; justify-content: space-between; align-items: center;
     padding: .65rem 1.25rem; border-bottom: 1px solid rgba(255,255,255,.05); transition: background .2s;
+    gap: 1rem;
   }
   .pl-item:last-child { border-bottom: none; }
   .pl-item:hover { background: rgba(255,255,255,.04); }
   .pl-item-name { font-size: .85rem; color: rgba(255,255,255,.7); }
-  .pl-item-price { font-family: 'Space Mono', monospace; font-size: .875rem; font-weight: 700; color: var(--lime); }
+  .pl-item-price { font-family: 'Space Mono', monospace; font-size: .875rem; font-weight: 700; color: var(--lime); white-space: nowrap; }
 
   /* MENGAPA */
   #mengapa { background: var(--off-white); }
@@ -295,84 +344,131 @@
     align-items: center;
     gap: .75rem;
     text-decoration: none;
-}
-
-.footer-logo-mark {
+  }
+  .footer-logo-mark {
     width: 50px;
     height: 50px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     overflow: hidden;
     border-radius: 8px;
-}
-
-.footer-logo-mark img {
+  }
+  .footer-logo-mark img {
     width: 100%;
     height: 100%;
     object-fit: contain;
     display: block;
-}
+  }
   .footer-logo-text { font-family: 'Space Mono', monospace; font-size: .9375rem; font-weight: 700; color: #fff; }
   .footer-logo-text span { color: var(--lime); }
   footer p { font-size: .8rem; color: #404040; }
-.footer-ig {
+  .footer-ig {
     width: 50px;
     height: 50px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     overflow: hidden;
     border-radius: 8px;
-}
-
-.footer-ig img {
+  }
+  .footer-ig img {
     width: 100%;
     height: 100%;
     object-fit: contain;
     display: block;
-}
-  /* .footer-ig { font-size: .8rem; color: #404040; text-decoration: none; transition: color .2s; } */
-  .footer-ig:hover { color: var(--lime); }
+  }
+  .footer-ig:hover { opacity: .8; }
 
   /* REVEAL */
   .reveal { opacity: 0; transform: translateY(28px); transition: opacity .65s ease, transform .65s ease; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
 
-  /* RESPONSIVE */
-  @media (max-width: 900px) { .treatment-grid { grid-template-columns: 1fr; } }
+  /* ======== RESPONSIVE ======== */
+  @media (max-width: 900px) {
+    .treatment-grid { grid-template-columns: 1fr 1fr; }
+  }
+
   @media (max-width: 768px) {
-    .hero { grid-template-columns: 1fr; text-align: center; }
-    .hero-sub { margin: 1.5rem auto 0; }
+    /* Hide desktop nav, show hamburger */
+    .nav-links { display: none; }
+    .nav-cta { display: none; }
+    .hamburger { display: flex; }
+
+    /* Hero stacks vertically */
+    .hero {
+      grid-template-columns: 1fr;
+      padding: 6.5rem 5% 4rem;
+      min-height: auto;
+      gap: 2rem;
+    }
+    .hero::before { font-size: 5rem; }
+    .hero-right { order: -1; }
+    .hero-sub { max-width: 100%; margin: 1.25rem auto 0; }
     .hero-actions { justify-content: center; }
     .hero-stats { justify-content: center; }
-    .hero-right { order: -1; }
-    .nav-links { display: none; }
+
+    /* Treatment 1 kolom */
+    .treatment-grid { grid-template-columns: 1fr; }
+    .layanan-hd { flex-direction: column; align-items: flex-start; }
+
+    /* Process stack */
     .process-item { flex-direction: column; gap: .75rem; }
-    .layanan-hd { flex-direction: column; }
+
+    /* Footer stack */
+    footer { flex-direction: column; text-align: center; }
+
+    section { padding: 4rem 5%; }
+  }
+
+  @media (max-width: 480px) {
+    h1 { font-size: 2.1rem; }
+    h2 { font-size: 1.5rem; }
+    .hours-card { flex-direction: column; align-items: flex-start; }
+    .pricelist-grid { grid-template-columns: 1fr; }
+    .cta-btns { flex-direction: column; align-items: stretch; }
+    .cta-btns a { justify-content: center; }
+    .cta-info { gap: 1.5rem; }
+    .hero-actions { flex-direction: column; align-items: stretch; }
+    .hero-actions a { justify-content: center; }
   }
 </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">
-    <div class="logo-mark">
-    <img src="logo.jpg" alt="Logo">
-    </div>
-    <div class="logo-text">rawat<span>.ofc</span></div>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="logo-mark">
+        <img src="logo.jpg" alt="Logo">
+      </div>
+      <div class="logo-text">rawat<span>.ofc</span></div>
     </a>
-  <ul class="nav-links">
-    <li><a href="#layanan">Treatment</a></li>
-    <li><a href="#pricelist">Pricelist</a></li>
-    <li><a href="#proses">Proses</a></li>
-    <li><a href="#kontak">Kontak</a></li>
-  </ul>
-  <a href="https://wa.me/6287859762666" target="_blank" class="nav-cta">📲 Order Sekarang</a>
+    <ul class="nav-links">
+      <li><a href="#layanan">Treatment</a></li>
+      <li><a href="#pricelist">Pricelist</a></li>
+      <li><a href="#proses">Proses</a></li>
+      <li><a href="#kontak">Kontak</a></li>
+    </ul>
+    <a href="https://wa.me/6287859762666" target="_blank" class="nav-cta">📲 Order Sekarang</a>
+    <!-- Hamburger (mobile only) -->
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <!-- Mobile drawer -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#layanan">Treatment</a>
+    <a href="#pricelist">Pricelist</a>
+    <a href="#mengapa">Mengapa Kami</a>
+    <a href="#proses">Proses</a>
+    <a href="#area">Area</a>
+    <a href="#kontak">Kontak</a>
+    <a href="https://wa.me/6287859762666" target="_blank" class="m-cta">
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="16"> Order via WhatsApp
+    </a>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -383,13 +479,13 @@
     <p class="hero-sub">Cuci sepatu, tas, topi, hingga helm — rawat.ofc hadir untuk menjaga koleksi kamu tetap bersih dan terawat. Berbasis di Tasikmalaya, melayani Ciamis &amp; Banjar.</p>
     <div class="hero-actions">
       <a href="https://wa.me/6287859762666" target="_blank" class="btn-lime">
-  <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="18">
-  Chat WhatsApp
-</a>
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="18">
+        Chat WhatsApp
+      </a>
       <a href="https://www.instagram.com/rawat.ofc" target="_blank" class="btn-ghost">
-  <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" width="18">
-  @rawat.ofc
-</a>
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" width="18">
+        @rawat.ofc
+      </a>
     </div>
     <div class="hero-stats">
       <div><div class="stat-num">933+</div><div class="stat-label">Followers Instagram</div></div>
@@ -595,13 +691,13 @@
   <p>Jangan biarkan kotoran merusak gaya kamu. rawat.ofc responsif dan siap melayani setiap hari.</p>
   <div class="cta-btns">
     <a href="https://wa.me/6287859762666" target="_blank" class="btn-blue">
-  <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="18">
-  Chat Di WhatsApp
-</a>
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="18">
+      Chat Di WhatsApp
+    </a>
     <a href="https://www.instagram.com/rawat.ofc" target="_blank" class="btn-outline-blue">
-  <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" width="18">
-  DM Instagram
-</a>
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" width="18">
+      DM Instagram
+    </a>
   </div>
   <div class="cta-info">
     <div class="cta-info-item"><div class="cta-info-label">WhatsApp</div><div class="cta-info-val">+62 878-5976-2666</div></div>
@@ -615,18 +711,41 @@
 <footer>
   <a href="#" class="footer-logo-wrap">
     <div class="footer-logo-mark">
-    <img src="logo.jpg" alt="Logo">
+      <img src="logo.jpg" alt="Logo">
     </div>
     <div class="footer-logo-text">rawat<span>.ofc</span></div>
   </a>
   <p>© 2026 rawat.ofc · Cuci Sepatu Tasikmalaya, Ciamis, Banjar</p>
   <div class="footer-ig">
     <img src="dci.png" alt="Logo">
-    </div>
-  <!-- <a href="https://www.instagram.com/rawat.ofc" target="_blank" class="footer-ig">@rawat.ofc</a> -->
+  </div>
 </footer>
 
 <script>
+  // Hamburger toggle
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  // Tutup menu saat link diklik
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    });
+  });
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+
+  // Scroll reveal
   const reveals = document.querySelectorAll('.reveal');
   const obs = new IntersectionObserver(entries => {
     entries.forEach((e, i) => {
@@ -634,9 +753,6 @@
     });
   }, { threshold: 0.1 });
   reveals.forEach(el => obs.observe(el));
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => { const t = document.querySelector(a.getAttribute('href')); if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});} });
-  });
 </script>
 </body>
 </html>
