@@ -315,7 +315,7 @@ Email: redigrandisvinata21@gmail.com
 
 🌐 **Website:** https://rawatofc.my.id/
 
-📷 **Instagram:** @rawat.ofc
+📷 **Instagram:** https://www.instagram.com/rawat.ofc
 
 💻 **Repository:** https://github.com/ridezoldyck/rawatofc
 
